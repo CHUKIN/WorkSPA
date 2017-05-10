@@ -15,8 +15,13 @@ function getViewCar(id) {
         }
     });
 
+    if ($.isEmptyObject(resultCar)) {
+        return "Такой машины нет";
+    }
+    else{
 
-    return `
+
+        return `
     <div class="well well-lg">
     <a href="./car/1">Открыть</a>
     <div class="row">
@@ -26,7 +31,8 @@ function getViewCar(id) {
     <div class="well well-sm">Модель: ${resultCar.value.Model}</div>  
     <div class="well well-sm">Просмотры: ${resultCar.value.watch}</div>
     <div class="well well-sm">Цена Р: ${resultCar.value.cost}</div>
-    <div class="well well-sm">Цена $: ${resultCar.value.cost/2}</div>
+    <div class="well well-sm">Цена $: ${resultCar.value.cost / 2}</div>
+    <div class="well well-sm">Цена €: ${resultCar.value.cost / 3}</div>
     </div>
     <div class="col-sm-4"><div class="well well-sm">Пробег: ${resultCar.value.mileage}</div>
     <div class="well well-sm">Тип: ${resultCar.value.type}</div>
@@ -37,4 +43,5 @@ function getViewCar(id) {
     </div>
     </div>
     `;
+    }
 }

@@ -98,6 +98,8 @@ function getSearchCars(params){
             }
 
 
+
+
             if (searchBool){
                 resultText+=getViewCar(arrayOfCars[i].key);
             }

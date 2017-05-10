@@ -62,7 +62,7 @@ function getChange(id) {
   <label for="sel1">Состояние</label>
   <select class="form-control" id="sel7" name="state" required >
    <option value=""></option>
-    <option value="Убитое">Убитое</option>
+    <option selected value="Убитое">Убитое</option>
     <option value="С пробегов">С пробегом</option>
   </select>
 </div>
@@ -76,14 +76,15 @@ function getChange(id) {
 
 function setChangeCar(query) {
     var newObj ={};
+    var bj = LocalStorageModule.get(query.id);
     newObj.mark = query.mark;
     newObj.year=query.year;
     newObj.Model=query.Model;
     newObj.cost=query.cost;
     newObj.mileage=query.mileage;
     newObj.state=query.state;
-    newObj.photoUrl="";
-    newObj.watch = 0;
+    newObj.photoUrl=bj.photoUrl;
+    newObj.watch = bj.watch;
     newObj.type=query.type;
     newObj.amount=query.amount;
     newObj.transmission=query.transmission;

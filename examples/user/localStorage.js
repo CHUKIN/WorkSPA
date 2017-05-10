@@ -10,7 +10,7 @@ const LocalStorageModule = function () {
     }
 
     function set(key, value) {
-        key=jsonSerialize(key);
+        //key=jsonSerialize(key);
         value=jsonSerialize(value);
         storage.setItem(key,value);
     }
