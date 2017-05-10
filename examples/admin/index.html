@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Basic</title>
+  <script src="/page.js"></script>
+  <script src="/admin/query.js"></script>
+  <script src="/admin/viewCars.js"></script>
+  <script src="/admin/viewCar.js"></script>
+  <script src="/admin/searchCars.js"></script>
+  <script src="/admin/changeAndDelete.js"></script>
+  <script src="/admin/newCar.js"></script>
+  <script src="/admin/query.js"></script>
+  <script src="/admin/changeCar.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <base href="/admin/" >
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="/admin/localStorage.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="">Машинки</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active" id="li1"><a href="./">Просмотр</a></li>
+      <li id="li2"><a href="./create">Создание</a></li>
+      <!--<li id="li3"><a href="./car/1">qwqwe</a></li>-->
+    </ul>
+  </div>
+</nav>
+<div id="content">
+</div>
+
+
+<script>
+    page.base('/admin');
+    page('/', index);
+    page('/create',create);
+    page('*', parse);
+    page('/newcar',newcar);
+    page('/changecar',changecar);
+    page('/change/:id', changeId);
+    page('/delete/:id', deleteId);
+    page();
+
+
+    function parse(ctx, next) {
+        ctx.query = qs.parse(location.search.slice(1));
+        next();
+    }
+
+    function newcar(ctx) {
+        document.querySelector('#content')
+            .innerHTML = setNewCar(ctx.query);
+        document.querySelector('#li2').classList.add('active');
+        document.querySelector('#li1').classList.remove('active');
+    }
+
+    function changecar(ctx) {
+        document.querySelector('#content')
+            .innerHTML = setChangeCar(ctx.query);
+        document.querySelector('#li2').classList.add('active');
+        document.querySelector('#li1').classList.remove('active');
+    }
+
+    function create(ctx) {
+        document.querySelector('#content')
+            .innerHTML = getNewCar();
+        document.querySelector('#li2').classList.add('active');
+        document.querySelector('#li1').classList.remove('active');
+
+
+    }
+
+
+    function index() {
+        var container = document.querySelector('#content');
+        container.innerHTML="";
+        container.appendChild(getTable());
+        container.querySelector('#li1').classList.add('active');
+        container.querySelector('#li2').classList.remove('active');
+    }
+
+    function changeId(ctx) {
+        document.querySelector('#content')
+            .innerHTML=getChange(ctx.params.id);
+
+    }
+    function deleteId(ctx) {
+        document.querySelector('#content')
+            .innerHTML=getDetele(ctx.params.id);
+
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

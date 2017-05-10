@@ -47,7 +47,10 @@ app.get(/^\/(mocha|chai)\.(css|js)$/i, function(req, res){
  */
 
 app.get('/', function(req, res){
-  res.render('list', { examples: examples });
+  //res.render('user/index', { examples: examples });
+    res.writeHead(200, {'Content-Type': 'text/html; charset=utf8'});
+    var index = fs.readFileSync('user/index.html');
+    res.end(index);
 });
 
 /**

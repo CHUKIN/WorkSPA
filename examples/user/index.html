@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Basic</title>
+  <script src="/page.js"></script>
+  <script src="/user/query.js"></script>
+  <script src="/user/viewCars.js"></script>
+    <script src="/user/viewCar.js"></script>
+    <script src="/user/searchCars.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <base href="/user/" >
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="/user/localStorage.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="">Машинки</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active" id="li1"><a href="./">Просмотр</a></li>
+      <li id="li2"><a href="./search">Поиск</a></li>
+
+
+    </ul>
+  </div>
+</nav>
+<div id="content">
+</div>
+
+
+<script>
+    page.base('/user');
+    page('/', index);
+    page('*', parse);
+    page('/search',search);
+    page('/car/:id', carId);
+    page();
+
+    function parse(ctx, next) {
+        ctx.query = qs.parse(location.search.slice(1));
+        next();
+    }
+
+
+
+
+    function search(ctx) {
+        document.querySelector('#content')
+            .innerHTML = getSearchCars(ctx.query);
+        document.querySelector('#li2').classList.add('active');
+        document.querySelector('#li1').classList.remove('active');
+
+
+    }
+
+
+    function index() {
+        var container = document.querySelector('#content');
+        container.innerHTML="";
+        container.appendChild((getViewCars()));
+        container.querySelector('#li1').classList.add('active');
+        container.querySelector('#li2').classList.remove('active');
+    }
+
+    function carId(ctx) {
+        document.querySelector('#content')
+            .innerHTML=getViewCar(ctx.params.id);
+
+    }
+
+
+
+
+
+</script>
+</body>
+</html>
